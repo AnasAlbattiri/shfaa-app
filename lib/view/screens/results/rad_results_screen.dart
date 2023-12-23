@@ -6,21 +6,23 @@ import 'package:patient_app/logic/controller/rad_results_controller.dart';
 import '../../../logic/controller/auth_controller.dart';
 import '../../../logic/controller/radiation_controller.dart';
 import '../../../utils/constants.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+// import 'package:printing/printing.dart';
+
+import '../../widgets/print/pw_all_fields.dart';
+import '../../widgets/print/pw_text_field_widget.dart';
 
 class RadResultsScreen extends StatefulWidget {
-  const RadResultsScreen({super.key,});
-
-
+  const RadResultsScreen({
+    super.key,
+  });
 
   @override
   State<RadResultsScreen> createState() => _RadResultsScreenState();
 }
 
 class _RadResultsScreenState extends State<RadResultsScreen> {
-
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController sexAgeController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final AuthController authController = Get.put(AuthController());
   late RadResultsController radResultsController;
@@ -30,45 +32,89 @@ class _RadResultsScreenState extends State<RadResultsScreen> {
   void initState() {
     super.initState();
     radResultsController = Get.put(RadResultsController(10617, 1));
-    radiationController = Get.put(RadiationController(9577));
-
+    radiationController = Get.put(RadiationController(9577, 2));
   }
 
+  // Future<void> printDoc() async {
+  //   final doc = pw.Document();
+  //   doc.addPage(pw.Page(
+  //       pageFormat: PdfPageFormat.a4,
+  //       build: (pw.Context context) {
+  //         return pwBuildPdfContent();
+  //       }));
+  //   await Printing.layoutPdf(
+  //       onLayout: (PdfPageFormat format) async => doc.save());
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: Text('Radiology Result'),
+        title: Text('Radiology Result', style: TextStyle(fontFamily: 'Circular'),),
         centerTitle: true,
       ),
       backgroundColor: wColor,
       body: Obx(() {
-        return SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Stack(
-                  children: [
-                    allFields(radResultsController.radResults.first, radiationController.rays.first ),
-                  ],
+        if (radResultsController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else if (radResultsController.radResults.isNotEmpty) {
+          return SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          allFields(radResultsController.radResults.first,
+                              radiationController.rays.first),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                onPrimary: primaryColor,
+                                primary: primaryColor,
+                                minimumSize: const Size(150, 40),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                              onPressed: (){},
+                              // onPressed: () => printDoc(),
+                              child: const Text(
+                                "Save as PDF",
+                                style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Circular'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ),
+          );
+        } else {
+          return Center(
+              child: Text("No Radiology Result available"));
+        }
       }),
     );
   }
 
-  Widget TextFieldWidget(String title, String hintText,
-      TextEditingController controller,
-      {Function? onTap, bool readOnly = true, bool isMultiline = false, ScrollController? scrollController}) {
-    int? maxLines = isMultiline ? 20 : 1; // Allow multiline input if isMultiline is true
+  Widget TextFieldWidget(
+      String title, String hintText,
+      {Function? onTap,
+        bool readOnly = true,
+        bool isMultiline = false,
+        ScrollController? scrollController}) {
+    int? maxLines =
+    isMultiline ? 20 : 1; // Allow multiline input if isMultiline is true
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +126,7 @@ class _RadResultsScreenState extends State<RadResultsScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(
+        SizedBox(
           height: 6,
         ),
         Container(
@@ -97,14 +143,14 @@ class _RadResultsScreenState extends State<RadResultsScreen> {
           child: TextFormField(
             readOnly: readOnly,
             onTap: () => onTap?.call(),
-            controller: controller,
             style: TextStyle(
               fontFamily: 'Circular',
               fontWeight: FontWeight.bold,
             ),
             minLines: 1,
             maxLines: 9999, // This will allow the field to expand
-            keyboardType: isMultiline ? TextInputType.multiline : TextInputType.text,
+            keyboardType:
+            isMultiline ? TextInputType.multiline : TextInputType.text,
             scrollPadding: EdgeInsets.all(20.0),
 
             decoration: InputDecoration(
@@ -123,7 +169,6 @@ class _RadResultsScreenState extends State<RadResultsScreen> {
     );
   }
 
-
   Widget allFields(RadResultsModel radResults, RadiationModel radiationModel) {
     ScrollController scrollController = ScrollController();
     return Container(
@@ -132,31 +177,46 @@ class _RadResultsScreenState extends State<RadResultsScreen> {
         key: formKey,
         child: Column(
           children: [
-            SizedBox(height: 20,),
-            TextFieldWidget(
-                'Test Name',
-                '${radiationModel.testDesc}',
-                sexAgeController, onTap: () async {}, readOnly: true, ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextFieldWidget('Test Date', '${radResults.str}',
-                phoneController, onTap: () async {}, readOnly: true),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 20,
             ),
             TextFieldWidget(
-                'Test Time',
-                '${radResults.str2}',
-                sexAgeController, onTap: () async {}, readOnly: true),
-            const SizedBox(
+              'Test Name',
+              '${radiationModel.testDesc}',
+              onTap: () async {},
+              readOnly: true,
+            ),
+            SizedBox(
               height: 10,
             ),
-            TextFieldWidget('Test Result', '${radResults.bodyText}', nameController, isMultiline: true, scrollController: scrollController),
-
+            TextFieldWidget('Test Date', '${radResults.str}', onTap: () async {}, readOnly: true),
+            SizedBox(
+              height: 10,
+            ),
+            TextFieldWidget('Test Time', '${radResults.str2}',
+                onTap: () async {}, readOnly: true),
+            SizedBox(
+              height: 10,
+            ),
+            TextFieldWidget(
+                'Test Result', '${radResults.bodyText}',
+                isMultiline: true, scrollController: scrollController),
+            SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),
     );
   }
+
+  pw.Widget pwBuildPdfContent() {
+    return pw.Container(
+      child: pwAllFields(
+        radResultsController.radResults.first,
+        radiationController.rays.first,
+      ),
+    );
+  }
+
 }
