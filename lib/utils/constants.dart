@@ -16,7 +16,7 @@ const bColor = Colors.black;
 const Color mainColor = Color(0xFFFF7A00);
 const encounterrId = 9577;
 const patienttId = 153259;
-const defaultPadding = 16.0;
+const defaultPadding = 14.0;
 
 OutlineInputBorder textFieldBorder = OutlineInputBorder(
   borderSide: BorderSide(

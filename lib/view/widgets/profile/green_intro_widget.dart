@@ -33,40 +33,49 @@ Widget greenIntroWidget(){
 }
 
 Widget greenIntroWidgetWithoutLogos({String title = "",String? subtitle}){
-  return AspectRatio(
-    aspectRatio: 16 / 5, // Example aspect ratio
-    child: Container(
-      width: Get.width,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/mask.png', ),
-              fit: BoxFit.fill,
-              colorFilter: ColorFilter.mode(primaryColor, BlendMode.srcIn),
-
-      ),
-      ),
-      height: Get.height*0.3,
-      child: Container(
-          height: Get.height*0.1,
+  return Stack(
+    children: [
+      AspectRatio(
+        aspectRatio: 16 / 5, // Example aspect ratio
+        child: Container(
           width: Get.width,
-          margin: EdgeInsets.only(bottom: Get.height*0.05),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(title,style: TextStyle(
-                fontFamily: 'Circular',
-                fontWeight: FontWeight.bold,
-                color: wColor,
-              ),),
-              if(subtitle != null) Text(subtitle,style: TextStyle(
-                fontFamily: 'Circular',
-                fontWeight: FontWeight.bold,
-                color: wColor,
-              ),),
-            ],
-          )),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/mask.png', ),
+                  fit: BoxFit.fill,
+                  colorFilter: ColorFilter.mode(primaryColor, BlendMode.srcIn),
 
-    ),
+          ),
+          ),
+          height: Get.height*0.3,
+          child: Container(
+              height: Get.height*0.1,
+              width: Get.width,
+              margin: EdgeInsets.only(bottom: Get.height*0.05),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(title,style: TextStyle(
+                    fontFamily: 'Circular',
+                    fontWeight: FontWeight.bold,
+                    color: wColor,
+                  ),),
+                  if(subtitle != null) Text(subtitle,style: TextStyle(
+                    fontFamily: 'Circular',
+                    fontWeight: FontWeight.bold,
+                    color: wColor,
+                  ),),
+                ],
+              )),
+
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 160, top: 15),
+        child: Text('Profile', style: TextStyle(color: wColor, fontFamily: 'Circular', fontSize: 22),),
+      ),
+
+    ],
   );
 }

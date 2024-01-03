@@ -8,8 +8,7 @@ import '../../../logic/controller/radiation_controller.dart';
 import '../../../utils/constants.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-// import 'package:printing/printing.dart';
-
+import 'package:printing/printing.dart';
 import '../../widgets/print/pw_all_fields.dart';
 import '../../widgets/print/pw_text_field_widget.dart';
 
@@ -35,16 +34,16 @@ class _RadResultsScreenState extends State<RadResultsScreen> {
     radiationController = Get.put(RadiationController(9577, 2));
   }
 
-  // Future<void> printDoc() async {
-  //   final doc = pw.Document();
-  //   doc.addPage(pw.Page(
-  //       pageFormat: PdfPageFormat.a4,
-  //       build: (pw.Context context) {
-  //         return pwBuildPdfContent();
-  //       }));
-  //   await Printing.layoutPdf(
-  //       onLayout: (PdfPageFormat format) async => doc.save());
-  // }
+  Future<void> printDoc() async {
+    final doc = pw.Document();
+    doc.addPage(pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pwBuildPdfContent();
+        }));
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async => doc.save());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +82,7 @@ class _RadResultsScreenState extends State<RadResultsScreen> {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
-                              onPressed: (){},
-                              // onPressed: () => printDoc(),
+                              onPressed: () => printDoc(),
                               child: const Text(
                                 "Save as PDF",
                                 style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Circular'),

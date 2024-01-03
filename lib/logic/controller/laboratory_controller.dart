@@ -28,9 +28,19 @@ class LaboratoryController extends GetxController {
 
   void updatePrintFlag(int encounterId) {
     if (activeIndex == 0) {
-      fetchLaboratory(encounterId, 1); // Set printFlag to 1 for Active
-    } else {
-      fetchLaboratory(encounterId, 2); // Set printFlag to 2 for Pending
+      fetchLaboratory(encounterId, 1);
+      clearPendingData();
+    } else if (activeIndex == 1) {
+      fetchLaboratory(encounterId, 2);
+      clearActiveData();
     }
+  }
+
+  void clearActiveData() {
+    laboratories.clear();
+  }
+
+  void clearPendingData() {
+    laboratories.clear();
   }
 }

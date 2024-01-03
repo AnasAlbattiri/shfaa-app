@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_app/utils/local_notifications.dart';
 import 'package:patient_app/utils/routes.dart';
-import 'package:patient_app/view/screens/test_screen.dart';
-import 'logic/controller/upcoming_controller.dart';
 import 'utils/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalNotifications.init();
-
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,8 +17,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Patient App',
       theme: ThemeData(
+        useMaterial3: false,
         primarySwatch: Colors.blue,
-        primaryColor: primaryColor,
         textTheme: Theme.of(context).textTheme.apply(displayColor: textColor),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: TextButton.styleFrom(
@@ -36,7 +32,7 @@ class MyApp extends StatelessWidget {
           focusedBorder: textFieldBorder,
         ),
       ),
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.splash,
       getPages: AppRoutes.routes,
     );
   }

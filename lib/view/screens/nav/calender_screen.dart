@@ -10,12 +10,12 @@ import '../../widgets/nav/visits_card.dart';
 class CalenderScreen extends StatefulWidget {
   const CalenderScreen({Key? key}) : super(key: key);
 
+
   @override
   State<CalenderScreen> createState() => _CalenderScreenState();
 }
 
 class _CalenderScreenState extends State<CalenderScreen> {
-
 
   int activeIndex = 0;
   @override
@@ -56,8 +56,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 padding: const EdgeInsets.all(5),
                 groupValue: activeIndex,
                 children: {
-                  0: Text('Upcoming'),
-                  1: Text('Visits'),
+                  0: Text('Upcoming appt.'),
+                  1: Text('Visits prev.'),
                 },
                 onValueChanged: (value) {
                   setState(() {

@@ -7,6 +7,7 @@ import 'package:patient_app/utils/local_notifications.dart';
 import '../../../logic/controller/auth_controller.dart';
 import '../../../logic/controller/patient_info_controller.dart';
 import '../../../utils/constants.dart';
+import '../../../utils/routes.dart';
 import '../../widgets/profile/green_intro_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 allFields(patInfoController.patInfo.first),
                 Padding(
@@ -64,7 +65,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // authController.signOut();
+                        authController.signOut();
+                        // Navigate back to the login screen
+                        Get.offAllNamed(AppRoutes.login);
+
                       },
                       child: Text(
                         "Signout",
@@ -118,7 +122,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             validator: (input) => validator(input),
             controller: controller,
             style: TextStyle(
-              fontFamily: 'Circular',
               fontWeight: FontWeight.bold,
             ),
             decoration: InputDecoration(
@@ -132,7 +135,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               border: InputBorder.none,
               hintStyle: TextStyle(
                 fontSize: 12,
-                fontFamily: 'Circular',
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),

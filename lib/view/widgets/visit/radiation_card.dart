@@ -40,14 +40,12 @@ class _RadiationCardState extends State<RadiationCard> {
                 padding: const EdgeInsets.all(5),
                 groupValue: radiationController.activeIndex,
                 children: {
-                  0: Text('Active'),
+                  0: Text('Resulted'),
                   1: Text('Pending'),
                 },
                 onValueChanged: (value) {
                   setState(() {
                     radiationController.activeIndex = value!;
-
-                    // Update printFlag based on activeIndex
                     radiationController.updatePrintFlag(widget.encounterId);
                   });
                 },
@@ -58,11 +56,11 @@ class _RadiationCardState extends State<RadiationCard> {
                   ? Center(
                       child: Text(
                         (radiationController.activeIndex == 0)
-                            ? 'No Active rays found'
+                            ? 'No Resulted rays found'
                             : 'No Pending rays found',
                       ),
                     )
-                  : radiationList(),
+                  : radiationController.activeIndex == 0 ? radiationActiveList() : radiationPendingList(),
             ),
           ],
         ),
@@ -70,7 +68,7 @@ class _RadiationCardState extends State<RadiationCard> {
     });
   }
 
-  Widget radiationList() {
+  Widget radiationActiveList() {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
@@ -94,7 +92,7 @@ class _RadiationCardState extends State<RadiationCard> {
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
                     'assets/images/radiology.png',
-                    width: 45,
+                    width: 44,
                     fit: BoxFit.cover,
                     color: Colors.yellow,
                   ),
@@ -179,6 +177,110 @@ class _RadiationCardState extends State<RadiationCard> {
                                     fontFamily: 'Circular',
                                     fontSize: 12,
                                   ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      itemCount: radiationController.rays.length,
+    );
+  }
+
+  Widget radiationPendingList() {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        final ray = radiationController.rays[index];
+        return Padding(
+          padding: const EdgeInsets.only(
+            top: 8,
+          ),
+          child: Container(
+            width: double.maxFinite,
+            height: 160,
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            decoration: BoxDecoration(
+              color: primaryColor.withOpacity(0.80),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'assets/images/radiology.png',
+                    width: 44,
+                    fit: BoxFit.cover,
+                    color: Colors.yellow,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        ray.testDesc,
+                        maxLines: 2,
+                        style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          fontFamily: 'Circular',
+                        ),
+                      ),
+                      Text(
+                        ray.result,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: wColor,
+                          fontFamily: 'Circular',
+                        ),
+                      ),
+                      Text(
+                        ray.orderStatusDesc,
+                        style: TextStyle(
+                          fontFamily: 'Circular',
+                          color: wColor,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        width: 170,
+                        height: 28,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                          horizontal: 8.0,
+                        ),
+                        decoration: BoxDecoration(
+                            color: Colors.white24,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Ionicons.calendar_outline,
+                              size: 18,
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6, right: 12),
+                              child: Text(
+                                '${ray.orderDateStr}  ${ray.str}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Circular',
                                 ),
                               ),
                             ),

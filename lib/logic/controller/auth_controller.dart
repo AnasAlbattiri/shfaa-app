@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import '../../utils/constants.dart';
 
 class AuthController extends GetxController {
@@ -11,6 +10,8 @@ class AuthController extends GetxController {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isVisibility = false;
+
+
 
 
   void visibility() {
@@ -29,20 +30,16 @@ class AuthController extends GetxController {
 
       if (jsonResponse != null) {
         if (jsonResponse['result'] == 'msgPass') {
-          // final prefs = await SharedPreferences.getInstance();
+          var userId = jsonResponse['userId'];
+          var userName = jsonResponse['userName'];
+          var patientId = jsonResponse['patientId'];
           Get.offNamed('/main', arguments: {
-            'userId': jsonResponse['userId'],
-            'userName': jsonResponse['userName'],
-            'patientId': jsonResponse['patientId'],
+            'userId': userId,
+            'userName': userName,
+            'patientId': patientId,
           },
           );
-          // await prefs.setBool('isLoggedIn', true);
-          // await prefs.setInt('userId', jsonResponse['userId']);
-          // await prefs.setString('userName', jsonResponse['userName']);
-          // await prefs.setInt('patientId', jsonResponse['patientId']);
-
           print("Response: $jsonResponse['result'] ");
-
           update();
 
         } else if (jsonResponse['result'] == 'msgFail') {
@@ -56,13 +53,8 @@ class AuthController extends GetxController {
     }
   }
 
-  // Future<void> signOut() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('isLoggedIn', false);
-  //   await prefs.clear(); // This will clear all the stored data
-  //   // Navigate to the login screen
-  //   Get.offAllNamed('/login');
-  // }
+  Future<void> signOut() async {
+  }
 
 
 }

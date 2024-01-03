@@ -3,6 +3,7 @@ import 'package:patient_app/view/screens/drawer/appoint_screen.dart';
 import 'package:patient_app/view/screens/main/main_screen.dart';
 import '../view/screens/auth/login_screen.dart';
 import '../view/screens/auth/signup_screen.dart';
+import '../view/screens/main/splash_screen.dart';
 
 class AppRoutes {
 
@@ -25,6 +26,11 @@ class AppRoutes {
       name: '/main',
       page: () => MainScreen(),
     ),
+    GetPage(
+      name: '/splash',
+      page: () => SplashScreen(),
+    ),
+
 
   ];
 

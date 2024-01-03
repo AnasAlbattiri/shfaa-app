@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:patient_app/logic/controller/medic_controller.dart';
 import '../../../utils/constants.dart';
 
@@ -29,8 +28,8 @@ class _MedicScreenState extends State<MedicScreen> {
         title:             Row(
           children: [
             Image.asset(
-              'assets/images/chronic.png',
-              height: 55,
+              'assets/images/medic.png',
+              height: 40,
               color: Colors.yellow,
             ),
             SizedBox(
@@ -41,7 +40,7 @@ class _MedicScreenState extends State<MedicScreen> {
               style: TextStyle(
                 fontFamily: 'Circular',
                 color: wColor,
-                fontSize: 24,
+                fontSize: 20,
               ),
             ),
           ],
@@ -68,9 +67,8 @@ class _MedicScreenState extends State<MedicScreen> {
                         ),
                         child: Container(
                           width: double.maxFinite,
-                          height: 280,
-                          padding:
-                          const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                          height: 310,
+                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           decoration: BoxDecoration(
                             color: primaryColor.withOpacity(0.80),
                             borderRadius: BorderRadius.circular(20),
@@ -81,9 +79,9 @@ class _MedicScreenState extends State<MedicScreen> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.asset(
-                                  'assets/images/chronic.png',
-                                  width: 37,
-                                  height: 55,
+                                  'assets/images/medic.png',
+                                  width: 35,
+                                  height: 45,
                                   fit: BoxFit.cover,
                                   color: Colors.yellow,
                                 ),
@@ -152,6 +150,13 @@ class _MedicScreenState extends State<MedicScreen> {
                                     ),
                                     Text(
                                       '# of refills: ${medic.value3}',
+                                      style: TextStyle(
+                                        color: wColor,
+                                        fontFamily: 'Circular',
+                                      ),
+                                    ),
+                                    Text(
+                                      'Quantity: ${medic.quantity}',
                                       style: TextStyle(
                                         color: wColor,
                                         fontFamily: 'Circular',

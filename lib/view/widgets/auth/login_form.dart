@@ -26,6 +26,7 @@ class LoginForm extends StatelessWidget {
         children: [
           // TextFieldName(text: "Username"),
           TextFormField(
+            textInputAction: TextInputAction.next,
             controller: authController.userNameController,
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
@@ -40,6 +41,8 @@ class LoginForm extends StatelessWidget {
           // TextFieldName(text: "Password"),
           GetBuilder<AuthController>(builder: (_){
             return TextFormField(
+              textInputAction: TextInputAction.next,
+
               controller: authController.passwordController,
               obscureText: authController.isVisibility ? false : true,
               decoration: InputDecoration(

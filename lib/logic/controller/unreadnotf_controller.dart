@@ -5,6 +5,7 @@ import '../../data/model/laboratory_model.dart';
 import '../../data/model/unreadnotf_model.dart';
 import '../../data/web_services/insurance_service.dart';
 import '../../data/web_services/unreadnotf_service.dart';
+import '../../utils/local_notifications.dart';
 
 class UnReadNotfController extends GetxController {
   var isLoading = false.obs;
@@ -28,6 +29,16 @@ class UnReadNotfController extends GetxController {
       isLoading(false);
     }
   }
+
+  void addNotification(UnReadNotfModel newNotification) {
+    unNotifs.add(newNotification);
+    LocalNotifications.showDefaultNotification(
+      title: 'Shfaa Notification',
+      body: 'Your health is our first priority',
+      payload: 'This is Data',
+    );
+  }
+
 
   void removeClickedNotification(int id) {
     unNotifs.removeWhere((notification) => notification.id == id);

@@ -19,7 +19,7 @@ class InvoicesController extends GetxController {
         invoices.value = fetchedInvoices;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load invoices');
+      Get.snackbar('Error', 'Failed to load invoices: $e');
     } finally {
       isLoading(false);
     }

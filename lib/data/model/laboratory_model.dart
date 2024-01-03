@@ -4,17 +4,25 @@ class LaboratoryModel {
   final String str;
   final int errNumber;
   final int value;
-  final String doctorName; // 2
+  final int labTestCat; // lab test category
+  final int labTestResultType; // lab test result type
+  final int profileId; // profile id
+  final int machineId; // machine id
+  final int machineKitId;
+  final String doctorName;
+  final String colonyCount;
+  final String bectiriaTypeStr;
+  final String originSpecStr;
   final int id;
-  final String listFormate; // 3
-  final String orderDate; // 4
+  final String listFormate;
+  final String orderDate;
   final String orderDateStr;
   final int orderId;
-  final String orderTime; // 5
+  final String orderTime;
   final int repeatNo;
   final bool select;
   final String servCode;
-  final String servDesc; // 1
+  final String servDesc;
 
   LaboratoryModel({
     required this.type,
@@ -22,7 +30,15 @@ class LaboratoryModel {
     required this.str,
     required this.errNumber,
     required this.value,
+    required this.labTestCat,
+    required this.labTestResultType,
+    required this.profileId,
+    required this.machineId,
+    required this.machineKitId,
     required this.doctorName,
+    required this.bectiriaTypeStr,
+    required this.colonyCount,
+    required this.originSpecStr,
     required this.id,
     required this.listFormate,
     required this.orderDate,
@@ -42,7 +58,15 @@ class LaboratoryModel {
       str: json['str'] ?? '',
       errNumber: json['errNumber'] ?? 0,
       value: json['value'] ?? 0,
+      labTestCat: json['labTestCat'] ?? 0,
+      labTestResultType: json['labTestResultType'] ?? 0,
+      profileId: json['profileId'] ?? 0,
+      machineId: json['machineId'] ?? 0,
+      machineKitId: json['machineKitId'] ?? 0,
       doctorName: json['doctorName'] ?? '',
+      colonyCount: json['colonyCount'] ?? '',
+      bectiriaTypeStr: json['bectiriaTypeStr'] ?? '',
+      originSpecStr: json['originSpecStr'] ?? '',
       id: json['id'] ?? 0,
       listFormate: json['listFormate'] ?? '',
       orderDate: json['orderDate'] ?? '',
@@ -63,7 +87,15 @@ class LaboratoryModel {
       'str': str,
       'errNumber': errNumber,
       'value': value,
+      'labTestCat': labTestCat,
+      'labTestResultType': labTestResultType,
+      'profileId': profileId,
+      'machineId': machineId,
+      'machineKitId': machineKitId,
       'doctorName': doctorName,
+      'bectiriaTypeStr': bectiriaTypeStr,
+      'originSpecStr': originSpecStr,
+      'colonyCount': colonyCount,
       'id': id,
       'listFormate': listFormate,
       'orderDate': orderDate,

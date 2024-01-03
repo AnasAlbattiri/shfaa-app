@@ -26,7 +26,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: Text('Notifications Screen'),
+        title: const Text(
+        'Notifications',
+        style: TextStyle(
+          fontFamily: 'Circular',
+          color: wColor,
+          fontSize: 20,
+        ),
+      ),
       ),
       body: Obx(() {
         if (readNotfController.isLoading.isTrue) {

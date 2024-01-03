@@ -29,7 +29,7 @@ class InvoiceService {
         return invoices;
       }
       else {
-        throw Exception('Failed to load invoices');
+        throw Exception('Failed to load invoices: $response');
       }
     } catch (e) {
       throw Exception('Failed to load invoices: $e');

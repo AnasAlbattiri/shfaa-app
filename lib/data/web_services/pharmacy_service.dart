@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../../utils/constants.dart';
 import '../model/pharmacy_model.dart';
-import '../model/radiation_model.dart';
 
 class PharmacyService {
   static Future<List<PharmacyModel>> fetchPharmacy(int encounterId, activeFlag) async {

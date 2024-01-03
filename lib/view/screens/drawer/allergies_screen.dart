@@ -28,11 +28,11 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
         title: Row(
           children: [
             const Text(
-              'Allergies',
+              'Allergies Screen',
               style: TextStyle(
                 fontFamily: 'Circular',
                 color: wColor,
-                fontSize: 24,
+                fontSize: 20,
               ),
             ),
           ],

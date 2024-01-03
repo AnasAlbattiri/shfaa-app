@@ -3,6 +3,7 @@ class PharmacyModel {
   final String desc; // 5
   final String desc1;
   final String counter;
+  final String notes;
   final String str;
   final int errNumber;
   final String doctorName; // 3
@@ -25,6 +26,7 @@ class PharmacyModel {
     required this.desc,
     required this.desc1,
     required this.counter,
+    required this.notes,
     required this.str,
     required this.errNumber,
     required this.doctorName,
@@ -49,6 +51,7 @@ class PharmacyModel {
       desc: json['desc'] ?? '',
       desc1: json['desc1'] ?? '',
       counter: json['counter'] ?? '',
+      notes: json['notes'] ?? '',
       str: json['str'] ?? '',
       errNumber: json['errNumber'],
       doctorName: json['doctorName'] ?? '',
@@ -74,6 +77,7 @@ class PharmacyModel {
       'desc': desc,
       'desc1': desc1,
       'counter': counter,
+      'notes': notes,
       'str': str,
       'errNumber': errNumber,
       'doctorName': doctorName,

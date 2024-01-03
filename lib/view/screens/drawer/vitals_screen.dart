@@ -59,7 +59,7 @@ class _VitalsScreenState extends State<VitalsScreen> {
                         ),
                         child: Container(
                           width: double.maxFinite,
-                          height: 165,
+                          height: 175,
                           padding:
                           const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           decoration: BoxDecoration(
@@ -85,25 +85,7 @@ class _VitalsScreenState extends State<VitalsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Respiratory rate(Breath): ${vital.breathNo}',
-                                      maxLines: 3,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Theme.of(context).colorScheme.onPrimary,
-                                        fontFamily: 'Circular',
-                                      ),
-                                    ),
-                                    Text(
-                                      'Heart rate(Beat/min): ${vital.heartBeatNo}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: wColor,
-                                        fontFamily: 'Circular',
-
-                                      ),
-                                    ),
-                                    Text(
-                                      'Oxegin SAT %: ${vital.oxeginRate}',
+                                      'Temperature(C): ${vital.temperature}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: wColor,
@@ -122,7 +104,7 @@ class _VitalsScreenState extends State<VitalsScreen> {
                                       ),
                                     ),
                                     Text(
-                                      'Location: ${vital.siteDesc}',
+                                      'Oxegin SAT %: ${vital.oxeginRate}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: wColor,
@@ -131,7 +113,25 @@ class _VitalsScreenState extends State<VitalsScreen> {
                                       ),
                                     ),
                                     Text(
-                                      'Temperature(C): ${vital.temperature}',
+                                      'Heart rate(Beat/min): ${vital.heartBeatNo}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: wColor,
+                                        fontFamily: 'Circular',
+
+                                      ),
+                                    ),
+                                    Text(
+                                      'Respiratory rate(Breath): ${vital.breathNo}',
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Theme.of(context).colorScheme.onPrimary,
+                                        fontFamily: 'Circular',
+                                      ),
+                                    ),
+                                    Text(
+                                      'Institute: ${vital.siteDesc}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: wColor,
@@ -141,22 +141,22 @@ class _VitalsScreenState extends State<VitalsScreen> {
                                     ),
                                     Row(
                                       children: [
-                                        Icon(Icons.calendar_month, color: wColor, size: 16,),
+                                        Icon(Icons.calendar_month, color: Colors.yellow, size: 16,),
 
                                         Text(
                                           ' ${vital.str} ',
                                           style: TextStyle(
-                                            color: wColor,
+                                            color: Colors.yellow,
                                             fontFamily: 'Circular',
 
                                           ),
                                         ),
-                                        Icon(Icons.access_time_filled, color: wColor, size: 16,),
+                                        Icon(Icons.access_time_filled, color: Colors.yellow, size: 16,),
 
                                         Text(
                                           ' ${vital.str2}',
                                           style: TextStyle(
-                                            color: wColor,
+                                            color: Colors.yellow,
                                             fontFamily: 'Circular',
 
                                           ),

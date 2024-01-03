@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -151,28 +152,43 @@ class upcomingList extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SizedBox(
-                      height: 34,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: redColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                    Builder(
+                      builder: (context){
+                        return SizedBox(
+                          height: 34,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              backgroundColor: redColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () {
+                              final int patientId = Get.arguments['patientId'];
+                              allAppointmentsController.cancelAppointment(upcoming.apptNo!, upcoming.siteId!, patientId);
+                              upcomingController.removeAppointment(upcoming.apptNo!);
+                              var successSnack = SnackBar(
+                                elevation: 0,
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.transparent,
+                                content: AwesomeSnackbarContent(
+                                  title: 'Well done!',
+                                  message: 'You has been successfully cancelled.',
+                                  contentType: ContentType.success,
+                                ),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(successSnack);
+                            },
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(
+                                color: wColor,
+                                fontFamily: 'Circular',
+                              ),
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          final int patientId = Get.arguments['patientId'];
-                          allAppointmentsController.cancelAppointment(upcoming.apptNo!, upcoming.siteId!, patientId);
-                          upcomingController.removeAppointment(upcoming.apptNo!);
-                        },
-                        child: const Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: wColor,
-                            fontFamily: 'Circular',
-                          ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                     // SizedBox(
                     //   width: 10,

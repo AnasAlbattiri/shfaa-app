@@ -14,9 +14,9 @@ class VisitsCard extends StatefulWidget {
   @override
   State<VisitsCard> createState() => _VisitsCardState();
 }
-
-class _VisitsCardState extends State<VisitsCard> {
   late VisitsController visitsController;
+
+  class _VisitsCardState extends State<VisitsCard> {
 
   @override
   void initState() {

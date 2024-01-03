@@ -56,8 +56,8 @@ class _PharmacyCardState extends State<PharmacyCard> {
                   ? Center(
                       child: Text(
                         (pharmacyController.activeIndex == 0)
-                            ? 'No Active rays found'
-                            : 'No Pending rays found',
+                            ? 'No Active pharmacy found'
+                            : 'No Pending pharmacy found',
                       ),
                     )
                   : pharmacyList(),
@@ -79,7 +79,7 @@ class _PharmacyCardState extends State<PharmacyCard> {
           ),
           child: Container(
             width: double.maxFinite,
-            height: 150,
+            height: 235,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             decoration: BoxDecoration(
               color: primaryColor.withOpacity(0.80),
@@ -99,71 +99,88 @@ class _PharmacyCardState extends State<PharmacyCard> {
                   ),
                 ),
                 const SizedBox(width: 14),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      pharmacy.servDesc,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Circular',
-                        color: Theme.of(context).colorScheme.onPrimary,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        pharmacy.servDesc,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Circular',
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '${pharmacy.dosageNo} ${pharmacy.desc1} ${pharmacy.counter}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Circular',
-                        color: wColor,
+                      Text(
+                        '${pharmacy.dosageNo} ${pharmacy.desc1} ${pharmacy.counter}',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Circular',
+                          color: wColor,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Dr.${pharmacy.doctorName}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Circular',
-                        color: wColor,
+                      Text(
+                        'Dr.${pharmacy.doctorName}',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Circular',
+                          color: wColor,
+                        ),
                       ),
-                    ),
-                    Text(
-                      pharmacy.desc,
-                      style: TextStyle(
-                        color: wColor,
-                        fontFamily: 'Circular',
+                      Text(
+                        pharmacy.desc,
+                        style: TextStyle(
+                          color: wColor,
+                          fontFamily: 'Circular',
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 6,
-                        horizontal: 8.0,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white24,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Ionicons.calendar_outline,
-                            size: 18,
-                            color: Colors.white,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 6, right: 12),
-                            child: Text(
-                              '${pharmacy.dosageStartDateStr}  ${pharmacy.str}',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Circular',
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 25,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 8.0,
+                        ),
+                        decoration: BoxDecoration(
+                            color: Colors.white24,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Ionicons.calendar_outline,
+                              size: 18,
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6, right: 12),
+                              child: Text(
+                                '${pharmacy.dosageStartDateStr}  ${pharmacy.str}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Circular',
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      Divider(
+                        color: wColor,
+                        height: 20,
+                        thickness: 1,
+                      ),
+                      Text(
+                        '${pharmacy.notes}',
+                        style: TextStyle(
+                          color: Colors.yellow,
+                          fontFamily: 'Circular',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                    ],
+                  ),
                 )
               ],
             ),
