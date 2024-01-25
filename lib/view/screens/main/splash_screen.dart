@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-
 import '../../../utils/constants.dart';
 
 
@@ -14,8 +13,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  // String? finalPhoneNumber;
-
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2)).then((value) {
@@ -23,43 +20,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
     super.initState();
   }
-
-  // void checkUserStatus() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final bool doneScreenVisited = prefs.getBool('doneScreenVisited') ?? false;
-  //
-  //   if (doneScreenVisited) {
-  //     Future.delayed(Duration(seconds: 2)).then((value) {
-  //       Get.offNamed('/welcome'); // Done
-  //     });
-  //   } else {
-  //     // User hasn't visited the Done Screen
-  //     final user = auth.currentUser;
-  //
-  //     if (user == null) {
-  //       Future.delayed(Duration(seconds: 2)).then((value) {
-  //         Get.offNamed('/welcome');
-  //       });
-  //     } else {
-  //       Future.delayed(Duration(seconds: 2)).then((value) {
-  //         Get.offNamed('/welcome'); // Map
-  //       });
-  //     }
-  //   }
-  // }
-
-
-  // Future<void> getValidationData() async {
-  //   final user = auth.currentUser;
-  //
-  //   if (user != null) {
-  //     setState(() {
-  //       finalPhoneNumber = user.phoneNumber;
-  //     });
-  //     print(finalPhoneNumber);
-  //   }
-  // }
-
 
   @override
   Widget build(BuildContext context) {

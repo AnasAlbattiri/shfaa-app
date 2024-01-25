@@ -28,7 +28,7 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
         title: Row(
           children: [
             const Text(
-              'Allergies Screen',
+              'Allergies',
               style: TextStyle(
                 fontFamily: 'Circular',
                 color: wColor,
@@ -59,7 +59,6 @@ class _AllergiesScreenState extends State<AllergiesScreen> {
                         ),
                         child: Container(
                           width: double.maxFinite,
-                          height: 120,
                           padding:
                           const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           decoration: BoxDecoration(

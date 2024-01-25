@@ -25,7 +25,7 @@ class _MedicScreenState extends State<MedicScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title:             Row(
+        title: Row(
           children: [
             Image.asset(
               'assets/images/medic.png',
@@ -67,7 +67,6 @@ class _MedicScreenState extends State<MedicScreen> {
                         ),
                         child: Container(
                           width: double.maxFinite,
-                          height: 310,
                           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           decoration: BoxDecoration(
                             color: primaryColor.withOpacity(0.80),

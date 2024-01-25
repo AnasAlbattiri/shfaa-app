@@ -51,6 +51,7 @@ class VisitsCard extends StatefulWidget {
   }
 }
 
+
 class visitsList extends StatelessWidget {
   const visitsList({
     super.key,
@@ -72,7 +73,7 @@ class visitsList extends StatelessWidget {
             ),
             child: Container(
               width: double.maxFinite,
-              height: 175,
+              height: 190,
               padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 20),
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(0.80),
@@ -172,7 +173,7 @@ class visitsList extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30, left: 8),
+                    padding: const EdgeInsets.only(top: 30, left: 4),
                     child: IconButton(onPressed: (){
                       int encounterId =
                           visit.id; // Get encounterId from the selected visit

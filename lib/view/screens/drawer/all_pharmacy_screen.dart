@@ -2,77 +2,105 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:patient_app/logic/controller/all_pharmacy_controller.dart';
 import 'package:patient_app/logic/controller/pharmacy_controller.dart';
 import 'package:patient_app/utils/constants.dart';
 
-class PharmacyCard extends StatefulWidget {
-  final int encounterId;
-
-  const PharmacyCard({
+class AllPharmacyScreen extends StatefulWidget {
+  const AllPharmacyScreen({
     Key? key,
-    required this.encounterId,
   }) : super(key: key);
 
   @override
-  State<PharmacyCard> createState() => _PharmacyCardState();
+  State<AllPharmacyScreen> createState() => _AllPharmacyScreenState();
 }
 
-class _PharmacyCardState extends State<PharmacyCard> {
-  late PharmacyController pharmacyController;
+class _AllPharmacyScreenState extends State<AllPharmacyScreen> {
+  late AllPharmacyController allPharmacyController;
 
   @override
   void initState() {
     super.initState();
-    pharmacyController = Get.put(PharmacyController(widget.encounterId, 1));
+    final int patientId = Get.arguments['patientId'];
+
+    allPharmacyController = Get.put(AllPharmacyController(patientId, 1));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Expanded(
-        child: Column(
+    return Scaffold(
+      backgroundColor: wColor,
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: Row(
           children: [
-            Container(
-              width: 300,
-              child: CupertinoSlidingSegmentedControl(
-                padding: const EdgeInsets.all(5),
-                groupValue: pharmacyController.activeIndex,
-                children: {
-                  0: Text('Active'),
-                  1: Text('Pending'),
-                },
-                onValueChanged: (value) {
-                  setState(() {
-                    pharmacyController.activeIndex = value!;
-
-                    // Update printFlag based on activeIndex
-                    pharmacyController.updatePrintFlag(widget.encounterId);
-                  });
-                },
+            const Text(
+              'Pharmacy',
+              style: TextStyle(
+                fontFamily: 'Circular',
+                color: wColor,
+                fontSize: 20,
               ),
-            ),
-            Expanded(
-              child: pharmacyController.pharmacies.isEmpty
-                  ? Center(
-                      child: Text(
-                        (pharmacyController.activeIndex == 0)
-                            ? 'No Active pharmacy found'
-                            : 'No Pending pharmacy found',
-                      ),
-                    )
-                  : pharmacyList(),
             ),
           ],
         ),
-      );
-    });
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(defaultPadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Obx(() {
+              return Expanded(
+                child: Column(
+                  children: [
+                    Container(
+                      width: 300,
+                      child: CupertinoSlidingSegmentedControl(
+                        padding: const EdgeInsets.all(5),
+                        groupValue: allPharmacyController.activeIndex,
+                        children: {
+                          0: Text('Active'),
+                          1: Text('Pending'),
+                        },
+                        onValueChanged: (value) {
+                          setState(() {
+                            final int patientId = Get.arguments['patientId'];
+
+                            allPharmacyController.activeIndex = value!;
+
+                            // Update printFlag based on activeIndex
+                            allPharmacyController.updatePrintFlag(patientId);
+                          });
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: allPharmacyController.pharmacy.isEmpty
+                          ? Center(
+                        child: Text(
+                          (allPharmacyController.activeIndex == 0)
+                              ? 'No Active pharmacy found'
+                              : 'No Pending pharmacy found',
+                        ),
+                      )
+                          : pharmacyList(),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget pharmacyList() {
     return ListView.builder(
       physics: BouncingScrollPhysics(),
       itemBuilder: (context, index) {
-        final pharmacy = pharmacyController.pharmacies[index];
+        final pharmacy = allPharmacyController.pharmacy[index];
         return Padding(
           padding: const EdgeInsets.only(
             top: 8,
@@ -177,7 +205,6 @@ class _PharmacyCardState extends State<PharmacyCard> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
                     ],
                   ),
                 )
@@ -186,7 +213,7 @@ class _PharmacyCardState extends State<PharmacyCard> {
           ),
         );
       },
-      itemCount: pharmacyController.pharmacies.length,
+      itemCount: allPharmacyController.pharmacy.length,
     );
   }
 }

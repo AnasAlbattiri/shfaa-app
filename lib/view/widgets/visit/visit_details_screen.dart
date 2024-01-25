@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_app/utils/constants.dart';
-import 'package:patient_app/view/widgets/nav/upcoming_card.dart';
-import 'package:patient_app/view/widgets/visit/laboratory_card.dart';
+import 'package:patient_app/view/screens/lab/laboratory_card.dart';
 import 'package:patient_app/view/widgets/visit/pharmacy_card.dart';
-import 'package:patient_app/view/widgets/visit/radiation_card.dart';
+import 'package:patient_app/view/screens/rad/radiation_card.dart';
 
-import '../nav/visits_card.dart';
 
 class VisitDetailsScreen extends StatefulWidget {
   const VisitDetailsScreen({Key? key}) : super(key: key);

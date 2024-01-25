@@ -2,14 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:patient_app/logic/controller/lab_results_controller.dart';
 import 'package:patient_app/utils/constants.dart';
-import 'package:patient_app/view/screens/lab/cbc_result_screen.dart';
-import 'package:patient_app/view/screens/lab/culture_result_screen.dart';
 import 'package:patient_app/view/screens/lab/other_result_screen.dart';
-import 'package:patient_app/view/screens/lab/report_result_screen.dart';
-import 'package:patient_app/view/screens/lab/seminal_result_screen.dart';
-import 'package:patient_app/view/screens/lab/stool_result_screen.dart';
-import 'package:patient_app/view/screens/lab/urine_result_screen.dart';
 import '../../../logic/controller/laboratory_controller.dart';
 
 class LaboratoryCard extends StatefulWidget {
@@ -25,6 +20,7 @@ class LaboratoryCard extends StatefulWidget {
 
 class _LaboratoryCardState extends State<LaboratoryCard> {
   late LaboratoryController laboratoryController;
+  late LaboratoryResultsController laboratoryResultsController;
 
   @override
   void initState() {
@@ -60,18 +56,19 @@ class _LaboratoryCardState extends State<LaboratoryCard> {
                   },
                 ),
               ),
-              Expanded(
-                child: laboratoryController.laboratories.isEmpty
-                    ? Center(
-                        child: Text(
-                          (laboratoryController.activeIndex == 0)
-                              ? 'No Active laboratories found'
-                              : 'No Pending laboratories found',
-                        ),
-                      )
-                    : laboratoryController.activeIndex == 0 ? LaboratoryActiveList(
-                    laboratoryController: laboratoryController) : LaboratoryPendingList(laboratoryController: laboratoryController),
-              ),
+              laboratoryController.laboratories.isEmpty
+                  ? Center(
+                      child: Text(
+                        (laboratoryController.activeIndex == 0)
+                            ? 'No Active laboratories found'
+                            : 'No Pending laboratories found',
+                      ),
+                    )
+                  : laboratoryController.activeIndex == 0
+                      ? LaboratoryActiveList(
+                          laboratoryController: laboratoryController)
+                      : LaboratoryPendingList(
+                          laboratoryController: laboratoryController),
             ],
           ),
         );
@@ -105,13 +102,33 @@ class LaboratoryActiveList extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           final laboratory = laboratoryController.laboratories[index];
+          Map<String, dynamic> arguments = {
+            'orderId': laboratory.orderId,
+            'orderDtlId': laboratory.id,
+            'testCat': laboratory.labTestCat,
+            'resultType': laboratory.labTestResultType,
+            'profileId': laboratory.profileId,
+            'siteId': laboratory.siteId,
+          };
+
+          Map<String, dynamic> otherArguments = {
+            'orderId': laboratory.orderId,
+            'orderDtlId': laboratory.id,
+            'testCat': laboratory.labTestCat,
+            'resultType': laboratory.labTestResultType,
+            'profileId': laboratory.profileId,
+            'siteId': laboratory.siteId,
+            'labTestId': laboratory.labTestId,
+            'machineId': laboratory.machineId,
+            'machineKitId': laboratory.machineKitId,
+            'value4': laboratory.value4,
+          };
           return Padding(
             padding: const EdgeInsets.only(
               top: 8,
             ),
             child: Container(
               width: double.maxFinite,
-              height: 175,
               padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 20),
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(0.80),
@@ -197,8 +214,8 @@ class LaboratoryActiveList extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
-                                width: 75,
+                                height: 18,
+                                width: 70,
                                 child: OutlinedButton(
                                   style: OutlinedButton.styleFrom(
                                     backgroundColor: Colors.green,
@@ -207,26 +224,7 @@ class LaboratoryActiveList extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: () {
-                                    if (laboratory.labTestCat == 1) {
-                                      if (laboratory.profileId == 8) {
-                                        Get.to(UrineResultScreen());
-                                      } else if (laboratory.profileId == 12) {
-                                        Get.to(StoolResultScreen());
-                                      } else if (laboratory.profileId == 17) {
-                                        Get.to(SeminalResultScreen());
-                                      } else if (laboratory.labTestResultType == 1 ||
-                                          laboratory.labTestResultType == 2 ||
-                                          laboratory.labTestResultType == 4 ||
-                                          laboratory.labTestResultType == 6) {
-                                        Get.to(OtherResultScreen());
-                                      } else if (laboratory.labTestResultType == 5) {
-                                        Get.to(CultureResultScreen());
-                                      } else if (laboratory.labTestResultType == 3) {
-                                        Get.to(ReportResultScreen());
-                                      }
-                                    } else if (laboratory.labTestCat == 3) {
-                                      Get.to(CbcResultScreen());
-                                    }
+                                    Get.to(() => OtherResultScreen(), arguments: otherArguments);
                                   },
                                   child: const Text(
                                     'Results',
@@ -276,7 +274,6 @@ class LaboratoryPendingList extends StatelessWidget {
             ),
             child: Container(
               width: double.maxFinite,
-              height: 150,
               padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 20),
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(0.80),

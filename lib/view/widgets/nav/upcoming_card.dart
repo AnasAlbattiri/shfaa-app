@@ -77,7 +77,6 @@ class upcomingList extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 5),
       child: Container(
         width: double.maxFinite,
-        height: 180,
         padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 20),
         decoration: BoxDecoration(
           color: primaryColor.withOpacity(0.80),

@@ -18,13 +18,10 @@ Widget greenIntroWidget(){
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-
         SvgPicture.asset('assets/images/leaf icon.svg'),
-
         const SizedBox(
           height: 20,
         ),
-
         SvgPicture.asset('assets/images/greenTaxi.svg')
 
       ],
@@ -72,7 +69,7 @@ Widget greenIntroWidgetWithoutLogos({String title = "",String? subtitle}){
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(left: 160, top: 15),
+        padding: const EdgeInsets.only(left: 10, top: 15),
         child: Text('Profile', style: TextStyle(color: wColor, fontFamily: 'Circular', fontSize: 22),),
       ),
 

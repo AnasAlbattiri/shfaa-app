@@ -72,9 +72,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Container(
                           width: double.maxFinite,
-                          height: 143,
-                          padding:
-                          const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           decoration: BoxDecoration(
                             color: primaryColor.withOpacity(0.80),
                             borderRadius: BorderRadius.circular(20),

@@ -9,6 +9,7 @@ class LaboratoryModel {
   final int profileId; // profile id
   final int machineId; // machine id
   final int machineKitId;
+  final int siteId;
   final String doctorName;
   final String colonyCount;
   final String bectiriaTypeStr;
@@ -23,6 +24,8 @@ class LaboratoryModel {
   final bool select;
   final String servCode;
   final String servDesc;
+  final int labTestId;
+  final int value4;
 
   LaboratoryModel({
     required this.type,
@@ -35,6 +38,7 @@ class LaboratoryModel {
     required this.profileId,
     required this.machineId,
     required this.machineKitId,
+    required this.siteId,
     required this.doctorName,
     required this.bectiriaTypeStr,
     required this.colonyCount,
@@ -49,6 +53,8 @@ class LaboratoryModel {
     required this.select,
     required this.servCode,
     required this.servDesc,
+    required this.labTestId,
+    required this.value4,
   });
 
   factory LaboratoryModel.fromJson(Map<String, dynamic> json) {
@@ -63,6 +69,7 @@ class LaboratoryModel {
       profileId: json['profileId'] ?? 0,
       machineId: json['machineId'] ?? 0,
       machineKitId: json['machineKitId'] ?? 0,
+      siteId: json['siteId'] ?? 0,
       doctorName: json['doctorName'] ?? '',
       colonyCount: json['colonyCount'] ?? '',
       bectiriaTypeStr: json['bectiriaTypeStr'] ?? '',
@@ -74,6 +81,8 @@ class LaboratoryModel {
       orderId: json['orderId'] ?? 0,
       orderTime: json['orderTime'] ?? '',
       repeatNo: json['repeatNo'] ?? 0,
+      value4: json['value4'] ?? 0,
+      labTestId: json['labTestId'] ?? 0,
       select: json['select'],
       servCode: json['servCode'] ?? '',
       servDesc: json['servDesc'] ?? '',
@@ -92,11 +101,14 @@ class LaboratoryModel {
       'profileId': profileId,
       'machineId': machineId,
       'machineKitId': machineKitId,
+      'siteId': siteId,
       'doctorName': doctorName,
       'bectiriaTypeStr': bectiriaTypeStr,
       'originSpecStr': originSpecStr,
+      'value4': value4,
       'colonyCount': colonyCount,
       'id': id,
+      'labTestId': labTestId,
       'listFormate': listFormate,
       'orderDate': orderDate,
       'orderDateStr': orderDateStr,

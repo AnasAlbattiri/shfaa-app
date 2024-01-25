@@ -235,7 +235,7 @@ class _AppointScreenState extends State<AppointScreen> {
                                           arguments: {'patientId': patientId});
                                       LocalNotifications.showDefaultNotification(
                                         title: 'Shfaa Notification',
-                                        body: 'Your health is our first priority',
+                                        body: 'You has been successfully booked!',
                                         payload: 'This is Data',
                                       );
                                     }

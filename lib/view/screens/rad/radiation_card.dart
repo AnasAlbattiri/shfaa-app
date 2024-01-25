@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:patient_app/logic/controller/radiation_controller.dart';
 import 'package:patient_app/utils/constants.dart';
-import 'package:patient_app/view/screens/results/rad_results_screen.dart';
+import 'package:patient_app/view/screens/rad/rad_results_screen.dart';
 
 class RadiationCard extends StatefulWidget {
   final int encounterId;
@@ -79,7 +79,6 @@ class _RadiationCardState extends State<RadiationCard> {
           ),
           child: Container(
             width: double.maxFinite,
-            height: 150,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             decoration: BoxDecoration(
               color: primaryColor.withOpacity(0.80),

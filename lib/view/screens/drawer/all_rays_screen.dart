@@ -2,11 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:patient_app/logic/controller/radiation_controller.dart';
 import 'package:patient_app/utils/constants.dart';
-import 'package:patient_app/view/screens/results/rad_results_screen.dart';
-
 import '../../../logic/controller/all_rays_controller.dart';
+import '../rad/rad_results_screen.dart';
 
 class AllRaysScreen extends StatefulWidget {
 
@@ -38,7 +36,7 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
         title: Row(
           children: [
             const Text(
-              'All rays',
+              'All radiology',
               style: TextStyle(
                 fontFamily: 'Circular',
                 color: wColor,
@@ -52,7 +50,6 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
         padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
             Obx(() {
               return Expanded(
@@ -64,7 +61,7 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
                         padding: const EdgeInsets.all(5),
                         groupValue: allRaysController.activeIndex,
                         children: {
-                          0: Text('Active'),
+                          0: Text('Resulted'),
                           1: Text('Pending'),
                         },
                         onValueChanged: (value) {
@@ -81,11 +78,11 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
                           ? Center(
                         child: Text(
                           (allRaysController.activeIndex == 0)
-                              ? 'No Active rays found'
+                              ? 'No Resulted rays found'
                               : 'No Pending rays found',
                         ),
                       )
-                          : radiationList(),
+                          : allRaysController.activeIndex == 0 ? radiationActiveList() : radiationPendingList(),
                     ),
                   ],
                 ),
@@ -97,18 +94,17 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
     );
   }
 
-  Widget radiationList() {
+  Widget radiationActiveList() {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
-        final allRay = allRaysController.allRays[index];
+        final ray = allRaysController.allRays[index];
         return Padding(
           padding: const EdgeInsets.only(
             top: 8,
           ),
           child: Container(
             width: double.maxFinite,
-            height: 150,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             decoration: BoxDecoration(
               color: primaryColor.withOpacity(0.80),
@@ -132,7 +128,7 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        allRay.testDesc,
+                        ray.testDesc,
                         maxLines: 2,
                         style: TextStyle(
                           overflow: TextOverflow.ellipsis,
@@ -143,7 +139,7 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
                         ),
                       ),
                       Text(
-                        allRay.result,
+                        ray.result,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -152,7 +148,7 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
                         ),
                       ),
                       Text(
-                        allRay.orderStatusDesc,
+                        ray.orderStatusDesc,
                         style: TextStyle(
                           fontFamily: 'Circular',
                           color: wColor,
@@ -177,7 +173,7 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
                             Padding(
                               padding: EdgeInsets.only(left: 6, right: 12),
                               child: Text(
-                                '${allRay.orderDateStr}  ${allRay.str}',
+                                '${ray.orderDateStr}  ${ray.str}',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'Circular',
@@ -206,6 +202,110 @@ class _AllRaysScreenState extends State<AllRaysScreen> {
                                     fontFamily: 'Circular',
                                     fontSize: 12,
                                   ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      itemCount: allRaysController.allRays.length,
+    );
+  }
+
+  Widget radiationPendingList() {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        final ray = allRaysController.allRays[index];
+        return Padding(
+          padding: const EdgeInsets.only(
+            top: 8,
+          ),
+          child: Container(
+            width: double.maxFinite,
+            height: 160,
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            decoration: BoxDecoration(
+              color: primaryColor.withOpacity(0.80),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'assets/images/radiology.png',
+                    width: 44,
+                    fit: BoxFit.cover,
+                    color: Colors.yellow,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        ray.testDesc,
+                        maxLines: 2,
+                        style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          fontFamily: 'Circular',
+                        ),
+                      ),
+                      Text(
+                        ray.result,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: wColor,
+                          fontFamily: 'Circular',
+                        ),
+                      ),
+                      Text(
+                        ray.orderStatusDesc,
+                        style: TextStyle(
+                          fontFamily: 'Circular',
+                          color: wColor,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        width: 170,
+                        height: 28,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                          horizontal: 8.0,
+                        ),
+                        decoration: BoxDecoration(
+                            color: Colors.white24,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Ionicons.calendar_outline,
+                              size: 18,
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6, right: 12),
+                              child: Text(
+                                '${ray.orderDateStr}  ${ray.str}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Circular',
                                 ),
                               ),
                             ),

@@ -59,9 +59,7 @@ class _VitalsScreenState extends State<VitalsScreen> {
                         ),
                         child: Container(
                           width: double.maxFinite,
-                          height: 175,
-                          padding:
-                          const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           decoration: BoxDecoration(
                             color: primaryColor.withOpacity(0.80),
                             borderRadius: BorderRadius.circular(20),
@@ -104,7 +102,7 @@ class _VitalsScreenState extends State<VitalsScreen> {
                                       ),
                                     ),
                                     Text(
-                                      'Oxegin SAT %: ${vital.oxeginRate}',
+                                      'Oxygen SAT %: ${vital.oxeginRate}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: wColor,

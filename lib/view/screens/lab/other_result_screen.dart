@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:get/get.dart';
+import '../../../logic/controller/results_pdf_controller.dart';
 import '../../../utils/constants.dart';
+import 'package:share_plus/share_plus.dart';
 
 class OtherResultScreen extends StatefulWidget {
   const OtherResultScreen({super.key});
@@ -10,49 +13,54 @@ class OtherResultScreen extends StatefulWidget {
 }
 
 class _OtherResultScreenState extends State<OtherResultScreen> {
+  String? localPath;
+
+  @override
+  void initState() {
+    super.initState();
+    final int orderId = Get.arguments['orderId'];
+
+    ApiServiceProvider.loadPDF(orderId).then((value) {
+      setState(() {
+        localPath = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
-        backgroundColor: primaryColor,
-        title: Row(
-          children: [
-            const Text(
-              'Other Result',
-              style: TextStyle(
-                fontFamily: 'Circular',
-                color: wColor,
-                fontSize: 20,
-              ),
+      appBar: AppBar(
+        actions: <Widget>[
+          if (localPath != null)
+            IconButton(
+              icon: Icon(Icons.download),
+              onPressed: () {
+                Share.shareFiles([localPath!], text: 'Download your PDF file');
+              },
             ),
-          ],
-        ),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Table(
-            border: TableBorder.all(),
-            children: [
-              buildRow(['Name', 'Result', 'Unit', 'List'], isHeader: true,),
-              buildRow(['Name', 'Result', 'Unit', 'List']),
-              buildRow(['Name', 'Result', 'Unit', 'List']),
-              buildRow(['Name', 'Result', 'Unit', 'List']),
-            ],
+        ],
+        backgroundColor: primaryColor,
+        title: const Text(
+          'Laboratory Results',
+          style: TextStyle(
+            fontFamily: 'Circular',
+            color: wColor,
+            fontSize: 24,
           ),
         ),
       ),
+      body: localPath != null
+          ? Center(
+            child: Container(
+              height: 600,
+              width: double.infinity,
+              child: PDFView(
+                filePath: localPath,
+              ),
+            ),
+          )
+          : Center(child: CircularProgressIndicator()),
     );
   }
-
-  TableRow buildRow(List<String> cells, {bool isHeader = false}) => TableRow(
-        children: cells.map((cell) {
-          TextStyle style = TextStyle(
-            fontSize: 18,
-            fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
-          );
-          return Padding(
-              padding: EdgeInsets.all(12), child: Text(cell, style: style));
-        }).toList(),
-      );
 }

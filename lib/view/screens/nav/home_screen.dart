@@ -6,6 +6,7 @@ import 'package:patient_app/data/model/patient_info_model.dart';
 import 'package:patient_app/logic/controller/patient_info_controller.dart';
 import 'package:patient_app/logic/controller/unreadnotf_controller.dart';
 import 'package:patient_app/utils/constants.dart';
+import 'package:patient_app/view/screens/drawer/all_pharmacy_screen.dart';
 import '../../../logic/controller/doctor_info_controller.dart';
 import '../../../logic/controller/update_notf_controller.dart';
 import '../../widgets/nav/doctor_section.dart';
@@ -21,20 +22,17 @@ import 'medic_screen.dart';
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Controllers
   late PatientInfoController patInfoController;
   late DoctorInfoController doctorInfoController;
-
   late UnReadNotfController unReadNotfController;
-
-  final int patientId = Get.arguments['patientId'];
-
-  final UpdateNotfController updateNotfController = Get.put(UpdateNotfController());
+  final UpdateNotfController updateNotfController =
+      Get.put(UpdateNotfController());
 
   @override
   void initState() {
@@ -45,8 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
     patInfoController = Get.put(PatientInfoController(patientId));
     unReadNotfController = Get.put(UnReadNotfController(patientId));
   }
-  final List<String> categories = ['Active','Pending'];
-  List<String> selectedCategories = [];
+
+  final List<String> categories = ['Active', 'Pending'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,285 +110,275 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: Drawer(
-
-        backgroundColor: wColor,
         width: 250,
-        child: ListView(
+        backgroundColor: wColor,
+        child: Column(
           children: [
-            Stack(
-              children: [
-                Container(
-                  height: 120,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
+            DrawerHeader(
+              child: Stack(
+                children: [
+                  Container(
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color: wColor,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(0),
+                          bottomRight: Radius.circular(50)),
+                    ),
+                  ),
+                  Obx(() {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 60, top: 20),
+                      child: patientPicture(patInfoController.patInfo.first),
+                    );
+                  }),
+                ],
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                final int patientId = Get.arguments['patientId'];
+
+                Get.to(() => VitalsScreen(), arguments: {
+                  'patientId': patientId,
+                });
+              },
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/vital.png',
+                    height: 30,
+                    width: 30,
                     color: primaryColor,
-
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(50)),
                   ),
-                ),
-                Obx(() {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 20),
-                    child: patientPicture(patInfoController.patInfo.first),
-                  );
-                }),
-
-              ],
-            ),
-            SizedBox(height: 6,),
-            Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: primaryColor,
-                ),
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      Icon(
-                        Icons.view_timeline_outlined,
-                        size: 26,
-                        color: wColor,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Vitals',
-                        style: TextStyle(fontSize: 18, color: wColor, fontFamily: 'Circular'),
-                      ),
-                    ],
+                  SizedBox(
+                    width: 10,
                   ),
-                  onTap: () {
-                    final int patientId = Get.arguments['patientId'];
+                  Text(
+                    'Vitals',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: primaryColor,
+                      fontFamily: 'Circular',
 
-                    Get.to(() => VitalsScreen(), arguments: {
-                      'patientId': patientId,
-                    });
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: primaryColor,
-                ),
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      Icon(
-                        Icons.account_balance_wallet_rounded,
-                        size: 26,
-                        color: wColor,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Allergies',
-                        style: TextStyle(fontSize: 18, color: wColor, fontFamily: 'Circular'),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    final int patientId = Get.arguments['patientId'];
+            ListTile(
+              onTap: () {
+                final int patientId = Get.arguments['patientId'];
 
-                    Get.to(() => AllergiesScreen(), arguments: {
-                      'patientId': patientId,
-                    });
-                  },
-                ),
+                Get.to(() => AllergiesScreen(), arguments: {
+                  'patientId': patientId,
+                });
+              },
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/allergie.png',
+                    height: 30,
+                    width: 26,
+                    color: primaryColor,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Allergies',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: primaryColor,
+                      fontFamily: 'Circular',
+
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: primaryColor,
-                ),
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      Icon(
-                        Icons.archive,
-                        size: 26,
-                        color: wColor,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Visits history',
-                        style: TextStyle(fontSize: 18, color: wColor, fontFamily: 'Circular'),
-                      ),
-                    ],
+            ListTile(
+              onTap: () {
+                final int patientId = Get.arguments['patientId'];
+                Get.to(() => CalenderScreen(),
+                    arguments: {'patientId': patientId});
+              },
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/visits.png',
+                    height: 30,
+                    width: 26,
+                    color: primaryColor,
                   ),
-                  onTap: () {
-                    final int patientId = Get.arguments['patientId'];
-                    Get.to(() => CalenderScreen(),
-                        arguments: {'patientId': patientId});
-                  },
-                ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Visits history',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: primaryColor,
+                      fontFamily: 'Circular',
+
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6,),
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: primaryColor,
-                ),
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      Icon(
-                        Icons.notifications,
-                        size: 26,
-                        color: wColor,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Notifications',
-                        style: TextStyle(fontSize: 18, color: wColor, fontFamily: 'Circular'),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    final int patientId = Get.arguments['patientId'];
+            ListTile(
+              onTap: () {
+                final int patientId = Get.arguments['patientId'];
 
-                    Get.to(() => NotificationsScreen(), arguments: {
-                      'patientId': patientId,
-                    });
-                  },
-                ),
+                Get.to(() => AllLabsScreen(
+                  encounterId: encounterrId,
+                ), arguments: {
+                  'patientId': patientId,
+                });
+              },
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/lab.png',
+                    height: 30,
+                    width: 26,
+                    color: primaryColor,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Laboratory',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: primaryColor,
+                      fontFamily: 'Circular',
+
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6,),
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: primaryColor,
-                ),
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      Image.asset('assets/images/lab.png', height: 30, width: 26,),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Laboratoires',
-                        style: TextStyle(fontSize: 18, color: wColor, fontFamily: 'Circular'),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    final int patientId = Get.arguments['patientId'];
+            ListTile(
+              onTap: () {
+                final int patientId = Get.arguments['patientId'];
 
-                    Get.to(() => AllLabsScreen(), arguments: {
-                      'patientId': patientId,
-                    });
-                  },
-                ),
+                Get.to(() => AllRaysScreen(), arguments: {
+                  'patientId': patientId,
+                });
+              },
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/radiology.png',
+                    height: 30,
+                    width: 26,
+                    color: primaryColor,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Radiology',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: primaryColor,
+                      fontFamily: 'Circular',
+
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6,),
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: primaryColor,
-                ),
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      Image.asset('assets/images/radiology.png', height: 30, width: 26,),
+            ListTile(
+              onTap: () {
+                final int patientId = Get.arguments['patientId'];
 
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Radiology',
-                        style: TextStyle(fontSize: 18, color: wColor, fontFamily: 'Circular'),
-                      ),
-                    ],
+                Get.to(() => AllPharmacyScreen(), arguments: {
+                  'patientId': patientId,
+                });
+              },
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/pharm.png',
+                    height: 30,
+                    width: 26,
+                    color: primaryColor,
                   ),
-                  onTap: () {
-                    final int patientId = Get.arguments['patientId'];
-
-                    Get.to(() => AllRaysScreen(), arguments: {
-                      'patientId': patientId,
-                    });
-                  },
-                ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Pharmacy',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: primaryColor,
+                      fontFamily: 'Circular',
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6,),
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: primaryColor,
-                ),
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      Image.asset('assets/images/medic.png', height: 35, width: 28,),
 
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Medications',
-                        style: TextStyle(fontSize: 18, color: wColor, fontFamily: 'Circular'),
-                      ),
-                    ],
+            ListTile(
+              onTap: () {
+                final int patientId = Get.arguments['patientId'];
+
+                Get.to(() => MedicScreen(), arguments: {
+                  'patientId': patientId,
+                });
+              },
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/medic.png',
+                    height: 35,
+                    width: 28,
+                    color: primaryColor,
                   ),
-                  onTap: () {
-                    final int patientId = Get.arguments['patientId'];
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Chronic Meds',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: primaryColor,
+                      fontFamily: 'Circular',
 
-                    Get.to(() => MedicScreen(), arguments: {
-                      'patientId': patientId,
-                    });
-                  },
-                ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                final int patientId = Get.arguments['patientId'];
+
+                Get.to(() => NotificationsScreen(), arguments: {
+                  'patientId': patientId,
+                });
+              },
+              title: Row(
+                children: [
+                  Icon(
+                    Icons.notifications_none_rounded,
+                    size: 26,
+                    color: primaryColor,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Notifications',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: primaryColor,
+                      fontFamily: 'Circular',
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -398,15 +387,15 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget patientPicture(PatientInfoModel patInfo){
+  Widget patientPicture(PatientInfoModel patInfo) {
     Uint8List? imageBytes = patInfo.getPhotoAsBytes();
     return CircleAvatar(
       radius: 45,
       backgroundImage: MemoryImage(imageBytes!),
     );
   }
-  Widget patientInfo(PatientInfoModel patInfo) {
 
+  Widget patientInfo(PatientInfoModel patInfo) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -415,13 +404,17 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Builder(
-                builder: (context) {
-                  return IconButton(onPressed: (){
-                    Scaffold.of(context).openDrawer();
-                  }, icon: Icon(Icons.menu, color: wColor, size: 35,));
-                }
-              ),
+              Builder(builder: (context) {
+                return IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    icon: Icon(
+                      Icons.menu,
+                      color: wColor,
+                      size: 35,
+                    ));
+              }),
               IconButton(
                 onPressed: () {
                   Get.defaultDialog(
@@ -445,20 +438,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: ListView.builder(
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              final unNotif = unReadNotfController.unNotifs[index];
+                              final unNotif =
+                                  unReadNotfController.unNotifs[index];
 
-                              return InkWell(child: notificationItem(index), onTap: (){
-                                int patId = unNotif.patientId;
-                                int sysNotiId = unNotif.id;
-                                updateNotfController.updateNotification(sysNotiId, patId);
-                                unReadNotfController.removeClickedNotification(sysNotiId);
-                                print(patId);
-                                Get.to(() => NotificationsScreen(),arguments: {
-                                  'patientId': unNotif.patientId,
-                                } );
-                                // print(patientId);
-
-                              },);
+                              return InkWell(
+                                child: notificationItem(index),
+                                onTap: () {
+                                  int patId = unNotif.patientId;
+                                  int sysNotiId = unNotif.id;
+                                  updateNotfController.updateNotification(
+                                      sysNotiId, patId);
+                                  unReadNotfController
+                                      .removeClickedNotification(sysNotiId);
+                                  print(patId);
+                                  Get.to(() => NotificationsScreen(),
+                                      arguments: {
+                                        'patientId': unNotif.patientId,
+                                      });
+                                  // print(patientId);
+                                },
+                              );
                             },
                             itemCount: unReadNotfController.unNotifs.length,
                           ),
@@ -478,7 +477,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 icon: badges.Badge(
-                  badgeContent: Text('${unReadNotfController.unNotifs.length}', style: TextStyle(fontFamily: 'Circular', color: wColor, fontSize: 13),),
+                  badgeContent: Text(
+                    '${unReadNotfController.unNotifs.length}',
+                    style: TextStyle(
+                        fontFamily: 'Circular', color: wColor, fontSize: 10),
+                  ),
                   badgeAnimation: BadgeAnimation.slide(),
                   child: Icon(
                     Icons.notifications_outlined,
@@ -504,17 +507,17 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 10,
           ),
           Text(
-            'Your health matters most',
+            'Your health is our first priority',
             style: TextStyle(
               color: wColor,
-              fontSize: 25,
+              fontSize: 23,
               fontWeight: FontWeight.w500,
             ),
           ),
           GetBuilder<DoctorInfoController>(builder: (_) {
             return Container(
               margin: EdgeInsets.only(
-                top: 15,
+                top: 30,
                 bottom: 20,
               ),
               width: MediaQuery.of(context).size.width,
@@ -569,9 +572,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   Widget notificationItem(int index) {
     return Container(
-      margin: EdgeInsets.symmetric( vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -640,7 +644,8 @@ class _HomeScreenState extends State<HomeScreen> {
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
               fontWeight: FontWeight.w400,
-            ),),
+            ),
+          ),
           Text(
             unNotif.str3,
             maxLines: 1,
@@ -649,8 +654,8 @@ class _HomeScreenState extends State<HomeScreen> {
               fontWeight: FontWeight.w400,
               fontFamily: 'Circular',
               fontSize: 14,
-
-            ),),
+            ),
+          ),
         ],
       ),
     );
@@ -658,7 +663,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget timeAndDate(int index) {
     final unNotif = unReadNotfController.unNotifs[index];
-
 
     return Container(
       margin: EdgeInsets.only(

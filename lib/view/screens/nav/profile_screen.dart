@@ -2,8 +2,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_app/data/model/patient_info_model.dart';
-import 'package:patient_app/logic/controller/unreadnotf_controller.dart';
-import 'package:patient_app/utils/local_notifications.dart';
 import '../../../logic/controller/auth_controller.dart';
 import '../../../logic/controller/patient_info_controller.dart';
 import '../../../utils/constants.dart';
@@ -213,7 +211,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget profilePhoto(PatientInfoModel patInfo) {
     Uint8List? imageBytes = patInfo.getPhotoAsBytes();
-
     return Align(
       alignment: Alignment.bottomCenter,
       child: InkWell(

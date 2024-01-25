@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:patient_app/view/widgets/print/pw_text_field_widget.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
-
 import '../../../data/model/rad_results_model.dart';
 import '../../../data/model/radiation_model.dart';
+
 pw.Widget pwAllFields(
     RadResultsModel radResults,
     RadiationModel radiationModel,
