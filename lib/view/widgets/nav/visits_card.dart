@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:patient_app/logic/controller/visits_controller.dart';
 import 'package:patient_app/utils/constants.dart';
 import 'package:patient_app/view/widgets/visit/visit_details_screen.dart';
 import '../../../data/model/visits_model.dart';
+import '../../../logic/controller/drawer/visits_controller.dart';
 
 class VisitsCard extends StatefulWidget {
   const VisitsCard({
@@ -100,7 +100,6 @@ class visitsList extends StatelessWidget {
                           '${visit.locationDescEng}',
                           maxLines: 2,
                           style: TextStyle(
-
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.onPrimary,

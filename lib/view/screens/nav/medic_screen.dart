@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:patient_app/logic/controller/medic_controller.dart';
+import '../../../logic/controller/drawer/medic_controller.dart';
 import '../../../utils/constants.dart';
 
 class MedicScreen extends StatefulWidget {

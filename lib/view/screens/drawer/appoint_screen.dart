@@ -2,14 +2,14 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:patient_app/logic/controller/insurance_controller.dart';
+import 'package:patient_app/logic/controller/main/insurance_controller.dart';
 import 'package:patient_app/utils/constants.dart';
 import 'package:patient_app/view/screens/nav/calender_screen.dart';
 import '../../../data/model/doctor_info_model.dart';
-import '../../../logic/controller/all_appointments_controller.dart';
-import '../../../logic/controller/doctor_info_controller.dart';
+import '../../../logic/controller/book/all_appointments_controller.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
+import '../../../logic/controller/info/doctor_info_controller.dart';
 import '../../../utils/local_notifications.dart';
 
 class AppointScreen extends StatefulWidget {
@@ -246,8 +246,6 @@ class _AppointScreenState extends State<AppointScreen> {
                               style: TextStyle(fontFamily: 'Circular'),
                             ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.blue, // Button color
-                              onPrimary: Colors.white, // Text color
                             ),
                           ),
                         )

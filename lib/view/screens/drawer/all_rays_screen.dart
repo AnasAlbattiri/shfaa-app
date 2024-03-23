@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:patient_app/utils/constants.dart';
-import '../../../logic/controller/all_rays_controller.dart';
+import '../../../logic/controller/rad/all_rays_controller.dart';
 import '../rad/rad_results_screen.dart';
 
 class AllRaysScreen extends StatefulWidget {

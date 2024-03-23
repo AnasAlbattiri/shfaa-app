@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:patient_app/logic/controller/all_pharmacy_controller.dart';
-import 'package:patient_app/logic/controller/pharmacy_controller.dart';
+import 'package:patient_app/logic/controller/pharm/all_pharmacy_controller.dart';
+import 'package:patient_app/logic/controller/pharm/pharmacy_controller.dart';
 import 'package:patient_app/utils/constants.dart';
 
 class AllPharmacyScreen extends StatefulWidget {

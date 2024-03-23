@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:patient_app/logic/controller/allergies_controller.dart';
+import 'package:patient_app/logic/controller/drawer/allergies_controller.dart';
 import '../../../utils/constants.dart';
 
 class AllergiesScreen extends StatefulWidget {

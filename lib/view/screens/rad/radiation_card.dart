@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:patient_app/logic/controller/radiation_controller.dart';
 import 'package:patient_app/utils/constants.dart';
 import 'package:patient_app/view/screens/rad/rad_results_screen.dart';
+
+import '../../../logic/controller/rad/radiation_controller.dart';
 
 class RadiationCard extends StatefulWidget {
   final int encounterId;

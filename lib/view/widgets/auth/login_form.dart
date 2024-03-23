@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:patient_app/view/widgets/auth/signup_form.dart';
-import '../../../logic/controller/auth_controller.dart';
+import '../../../logic/controller/main/auth_controller.dart';
 import '../../../utils/constants.dart';
 import '../../screens/auth/forget_password_screen.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:get/get.dart';
-import '../../../logic/controller/results_pdf_controller.dart';
+import '../../../logic/controller/lab/lab_results_pdf_controller.dart';
 import '../../../utils/constants.dart';
 import 'package:share_plus/share_plus.dart';
 

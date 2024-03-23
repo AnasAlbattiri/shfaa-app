@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_app/data/model/rad_results_model.dart';
 import 'package:patient_app/data/model/radiation_model.dart';
-import 'package:patient_app/logic/controller/rad_results_controller.dart';
-import '../../../logic/controller/auth_controller.dart';
-import '../../../logic/controller/radiation_controller.dart';
+import 'package:patient_app/logic/controller/rad/rad_results_controller.dart';
+import '../../../logic/controller/main/auth_controller.dart';
+import '../../../logic/controller/rad/radiation_controller.dart';
 import '../../../utils/constants.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -75,8 +75,6 @@ class _RadResultsScreenState extends State<RadResultsScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                onPrimary: primaryColor,
-                                primary: primaryColor,
                                 minimumSize: const Size(150, 40),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),

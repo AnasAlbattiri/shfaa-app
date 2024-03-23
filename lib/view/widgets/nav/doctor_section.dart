@@ -2,9 +2,10 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_app/data/model/doctor_info_model.dart';
-import 'package:patient_app/logic/controller/doctor_info_controller.dart';
 import 'package:patient_app/utils/constants.dart';
 import 'package:patient_app/view/screens/drawer/appoint_screen.dart';
+
+import '../../../logic/controller/info/doctor_info_controller.dart';
 
 class DoctorsSection extends StatelessWidget {
   DoctorsSection({Key? key}) : super(key: key);

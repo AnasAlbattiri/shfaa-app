@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../logic/controller/vitals_controller.dart';
+import '../../../logic/controller/drawer/vitals_controller.dart';
 import '../../../utils/constants.dart';
 
 class VitalsScreen extends StatefulWidget {

@@ -1,14 +1,12 @@
 import 'dart:typed_data';
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:patient_app/logic/controller/all_appointments_controller.dart';
-import 'package:patient_app/logic/controller/upcoming_controller.dart';
+import 'package:patient_app/logic/controller/book/all_appointments_controller.dart';
 import 'package:patient_app/utils/constants.dart';
-
 import '../../../data/model/upcoming_model.dart';
+import '../../../logic/controller/book/upcoming_controller.dart';
 
 class UpcomingCard extends StatefulWidget {
   const UpcomingCard({

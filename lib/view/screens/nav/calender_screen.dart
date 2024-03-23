@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:patient_app/utils/constants.dart';
 import 'package:patient_app/view/widgets/nav/upcoming_card.dart';
-
-import '../../../logic/controller/upcoming_controller.dart';
 import '../../widgets/nav/visits_card.dart';
 
 class CalenderScreen extends StatefulWidget {

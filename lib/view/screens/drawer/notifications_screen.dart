@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_app/utils/constants.dart';
-import '../../../logic/controller/readnotf_controller.dart';
+import '../../../logic/controller/notif/readnotf_controller.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});

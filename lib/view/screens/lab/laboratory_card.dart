@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:patient_app/logic/controller/lab_results_controller.dart';
 import 'package:patient_app/utils/constants.dart';
 import 'package:patient_app/view/screens/lab/other_result_screen.dart';
-import '../../../logic/controller/laboratory_controller.dart';
+import '../../../logic/controller/lab/lab_results_controller.dart';
+import '../../../logic/controller/lab/laboratory_controller.dart';
 
 class LaboratoryCard extends StatefulWidget {
   final int encounterId;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:patient_app/logic/controller/auth_controller.dart';
-import '../../../logic/controller/main_controller.dart';
+import 'package:patient_app/logic/controller/main/auth_controller.dart';
+import '../../../logic/controller/main/main_controller.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../../../utils/constants.dart';
 
@@ -14,14 +14,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   final int patientId = 153259;
-  //
-  //
-  //
-  // }
   final mainController = Get.put(MainController());
 
   int currentIndex = 0;

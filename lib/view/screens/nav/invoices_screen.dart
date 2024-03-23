@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:patient_app/logic/controller/invoices_controller.dart';
-import '../../../data/model/invoices_model.dart';
+import '../../../logic/controller/main/invoices_controller.dart';
 import '../../../utils/constants.dart';
 
 class InvoicesScreen extends StatefulWidget {

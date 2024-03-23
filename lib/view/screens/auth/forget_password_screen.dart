@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../logic/controller/auth_controller.dart';
+import '../../../logic/controller/main/auth_controller.dart';
 import '../../../utils/constants.dart';
 import '../../widgets/auth/auth_text_form_field.dart';
 
